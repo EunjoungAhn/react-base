@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<body>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <div id="root"></div>
+  <script>
+    const rootElement = document.getElementById("root");
+    const elementV = document.createElement("h1");
+    const element = React.createElement("h1",{children: "Hello, World"});
+    // element.textContent = "Hello, World:";
+
+    console.log(elementV)//순수 자바스크립트
+    console.log(element)//리액트
+
+    ReactDOM.render(element, rootElement);
+    // rootElement.appendChild(element);
+  </script>
+</body>
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      //const element = React.createElement("h1",{children: "Hello, World"});
+      const rootElement = document.getElementById("root");
+      const text = "Hello, World!";
+      const titleClassName = "title";
+      const element = <h1 {...props} />
+      ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html> 

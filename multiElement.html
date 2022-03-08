@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      //const element = React.createElement("h1",{children: "Hello, World"});
+      const rootElement = document.getElementById("root");
+      const text = "Hello, World!";
+      const titleClassName = "title";
+      const element = <h1 {...props} />
+      //const text = "Hello, World!";
+      //const titleClassName = "title";
+      //const element = <h1 {...props} />
+      const element = (
+        //React.Fragment는 부모로써는 쓰이지만, html 상에서는 보이지 않는다.
+        /*
+        <React.Fragment>
+        //childeren은 여려개 넣을 수 있다.
+          className="box" childeren={
+            [
+              <h1>"Hi"</h1>,
+              React.createElement("h3", null, "Bye"),
+              React.createElement("h5", null, "children")
+            ]}
+          </React.Fragment>
+        */
+       //좀 더 html 문법으로 보이도록 수정
+        /*
+        //childeren은 여려개 넣을 수 있다.
+          className="box" childeren={
+            [
+              <h1>"Hi"</h1>,
+              React.createElement("h3", null, "Bye"),
+              React.createElement("h5", null, "children")
+            ]}
+        */
+
+       //좀 더 html 문법으로 보이도록 수정
+       <>
+          <h1>"Hi"</h1>
+          <h3>"Hi2"</h3>
+          <h5>"Hi4"</h5>
+        </>
+      );
+      ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      const state = { keyword: "", typing: false, result: "" }
+
+      const App = () => {
+        function handleChange(event) {
+          setState({ typing: true, keyword: event.target.value});
+        }
+
+        function handleClick(event) {
+          setState({ 
+            typing: false,
+            result: `we find results of ${state.keyword}`
+          });
+        }
+        
+        return (
+          <>
+          <input onChange={handleChange}/>
+          <button onChange={handleClick}>serch</button>
+            <P>
+              {state.typing ?  `Looking for ${state.keyword}...`: state.result}
+               lookinf  for {state.keyword}...
+            </P>
+          </>
+        )
+      };
+
+      //전역 변수를 업데이 해줄 함수
+      function setState(newState){
+        //기존의 값에 state에 다라지는 것을 update를 쓰겠다.
+        object.assgin(state, newState);
+        //렌더를 한번하면 변화가 없어서
+        //새 스테이터스가 적용될때 마다 render
+        render();
+      };
+      
+      function rdnder(){
+        ReactDOM.render(<App/>, rootElement);
+      }
+      render();      
+      </script>
+    </body>
+</html>

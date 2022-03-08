@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      <div id="root"></div>
+      <script>
+        const rootElement = document.getElementById("root");
+        const element = document.createElement("h1");
+        element.textContent = "Hello, World:";
+        rootElement.appendChild(element);
+        // const element = document.createElement("h1");
+        const element = React.createElement("h1",{children: "Hello, World"});
+        // element.textContent = "Hello, World:";
+
+        ReactDOM.render(element, rootElement);
+        // rootElement.appendChild(element);
+      </script>
+    </body>
+</html> 

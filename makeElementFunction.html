@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      //const element = React.createElement("h1",{children: "Hello, World"});
+      const rootElement = document.getElementById("root");
+      //const text = "Hello, World!";
+      //const titleClassName = "title";
+      //const element = <h1 {...props} />
+      const element = (
+        //React.Fragment는 부모로써는 쓰이지만, html 상에서는 보이지 않는다.
+        /*
+        <React.Fragment>
+        //childeren은 여려개 넣을 수 있다.
+          className="box" childeren={
+            [
+              <h1>"Hi"</h1>,
+              React.createElement("h3", null, "Bye"),
+              React.createElement("h5", null, "children")
+            ]}
+          </React.Fragment>
+        */
+       //좀 더 html 문법으로 보이도록 수정
+        /*
+        //childeren은 여려개 넣을 수 있다.
+          className="box" childeren={
+            [
+              <h1>"Hi"</h1>,
+              React.createElement("h3", null, "Bye"),
+              React.createElement("h5", null, "children")
+            ]}
+        */
+
+       //좀 더 html 문법으로 보이도록 수정
+      /*
+      //함수화 시키기
+      const paint = () => (
+       <>
+          <h1>"Hi"</h1>
+          <h3>"Hi2"</h3>
+          <h5>"Hi4"</h5>
+      </>
+      );
+      //반복하기
+      const element = (
+        <>
+          {paint()}
+          {paint()}
+          {paint()}
+        </>
+        )
+      */
+      //대문자로 사용하는 이유는 기존의 태그와 겹칠 수 있어서 
+      //React에서 권장하는 문법이다.
+      //React.createElement에서 첫번째는 타입, 두번째 인자인 props를 전달하는 것이다.
+      const Paint = ({title, description}) => (
+        <>
+          <h1>{title}</h1>
+          <h1>{description}</h1>
+        </>
+      );
+      ReactDOM.render(element, rootElement);
+
+      const element = (
+        <>
+          <Paint title="Good" description="good" />
+          <Paint title="Bad" description="bad" />
+          <Paint title="SO SO" description="so so" />
+        </>
+      );
+
+      ReactDOM.render(paint(), rootElement);
+    </script>
+  </body>
+</html> 
