@@ -6,26 +6,17 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
     <div id="root"></div>
     <script type="text/babel">
+      //react 이벤트 걸어보기
       const rootElement = document.getElementById("root");
-      //jsx와 js를 섞어 쓴 것이다.
-      const Text = ({text}) => {
-        //textrk 대문자로 시작하면 h1, 소문자로 시작하면 h3 return
-        if(text.charAt(0)=== text.charAt(0).toUpperCase()){//js
-          //jsx 
-          return <h1>{text}</h1>
-        } else{
-          <h3>{text}</h3>
-        }
-      
-      };
 
+      //함수를 밖으로 빼보았다.
+      const handleClick = () => alert("pressed");
+
+      //리액트는 카벨케이스로 이벤트를 걸어야 한다.
       const element = (
-        <>
-          <Text text="text" />
-          <Text text="text" />
-        </>
+        //리액트에서 표준적으로 하는 방식은 인라인 방식에서 함수로 빼서 적용하는 것이다.
+        <button onClick={handleClick}>pressed!</button>
       );
-
       ReactDOM.render(element, rootElement);
     </script>
   </body>
