@@ -4,7 +4,7 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
     <div id="root"></div>
     <script type="text/babel">
       //const element = React.createElement("h1",{children: "Hello, World"});
@@ -12,7 +12,7 @@
       //const text = "Hello, World!";
       //const titleClassName = "title";
       //const element = <h1 {...props} />
-      const element = (
+      //const element = (
         //React.Fragment는 부모로써는 쓰이지만, html 상에서는 보이지 않는다.
         /*
         <React.Fragment>
@@ -35,7 +35,6 @@
               React.createElement("h5", null, "children")
             ]}
         */
-
        //좀 더 html 문법으로 보이도록 수정
       /*
       //함수화 시키기
@@ -46,6 +45,7 @@
           <h5>"Hi4"</h5>
       </>
       );
+
       //반복하기
       const element = (
         <>
@@ -53,8 +53,9 @@
           {paint()}
           {paint()}
         </>
-        )
+      )
       */
+
       //대문자로 사용하는 이유는 기존의 태그와 겹칠 수 있어서 
       //React에서 권장하는 문법이다.
       //React.createElement에서 첫번째는 타입, 두번째 인자인 props를 전달하는 것이다.
