@@ -10,20 +10,30 @@
 
       //App을 컴포넌트라고 부를수 있다. 여러 element들의 집합체이기 때문에
       const App = () => {
-        let keyword = "";
+        //let keyword = "";
+        //const [keyword, setKeyword] = React.useState("");
+        //배열, 객체 등 useState에 넣을 수 있다.
+        const [result, setResult] = React.useState("");
+        const [typing, setTyping] = React.useState(false); //useState는 서로가 독립적이다.
+
+        const [keyword, setKeyword] = React.useState("");
 
         function handleChange(event) {
-          keyword = event.target.value;
+          setKeyword(event.target.value);
+          //keyword = event.target.value;
+          setTyping(true);
         }
 
-        function handleClick(event) {
+        function handleClick() {
+          setTyping(false)
+          setResult(`We find results of ${keyword}`);
         }
         
         return (
           <>
           <input onChange={handleChange}/>
           <button onChange={handleClick}>search</button>
-            <P>lookinf  for ...</P>
+            <P>{typing ? `lookinf  for ${keyword}...` : result}</P>
           </>
         );
       };
