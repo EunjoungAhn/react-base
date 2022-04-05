@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      //App을 컴포넌트라고 부를수 있다. 여러 element들의 집합체이기 때문에
+      const App = () => {
+        console.log("render");
+        const [keyword, setKeyword] = React.useState(() => {
+          console.log("initialize");
+          //이것을 기본 값으로 한다.
+         return window.localStorage.getItem("keyword")
+        });
+        const [result, setResult] = React.useState("");
+        const [typing, setTyping] = React.useState(false); //useState는 서로가 독립적이다.
+
+        //어느 것을 작동해도 다시 render이 되기 때문에 비효율적이여서
+        //어떤 독립된 공간에 담아두고 이를 실행하면 좋겠다 라는 의미의
+        //제공하는 함수 useEffect를 사용한다.
+
+        React.useEffect(()=> {
+          console.log("effect");
+          window.localStorage.setItem("keyword", keyword);
+          //두번째 값으로 배열을 줄 수 있다.
+        }, []);
+
+        function handleChange(event) {
+          //로컬 스토리지에 적은 내용 혹은 로그인 아이디를 저정해보자
+          setKeyword(event.target.value);
+          setTyping(true);
+        }
+
+        function handleClick() {
+          setTyping(false)
+          setResult(`We find results of ${keyword}`);
+        }
+        
+        return (
+          <>
+          <input onChange={handleChange} value={keyword} />
+          <button onChange={handleClick}>search</button>
+            <P>{typing ? `lookinf  for ${keyword}...` : result}</P>
+          </>
+        );
+      };
+
+        ReactDOM.render(<App/>, rootElement);
+      </script>
+    </body>
+</html>
