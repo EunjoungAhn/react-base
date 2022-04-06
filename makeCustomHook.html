@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      //useState와 useEffect의 작업을 공통으로 관리하기 위해서
+      //커스텀 훅 함수로 제작
+      function useLocalStaorage(itemName, value = ""){
+        const [state, setState] = React.useState(() => {
+         return window.localStorage.getItem("itemName") || value;
+        });
+
+        React.useEffect(()=> {
+          window.localStorage.setItem(itemName, state);
+        }, [state]);
+
+        return [state, setState];
+      }
+
+      //App을 컴포넌트라고 부를수 있다. 여러 element들의 집합체이기 때문에
+      const App = () => {
+        const [keyword, setKeyword] = useLocalStaorage("keyword");
+        const [result, setResult] = useLocalStaorage("result");
+        const [typing, setTyping] = useLocalStaorage("typing", false);
+
+        function handleChange(event) {
+          setKeyword(event.target.value);
+          setTyping(true);
+        }
+
+        function handleClick() {
+          setTyping(false)
+          setResult(`We find results of ${keyword}`);
+        }
+        
+        return (
+          <>
+          <input onChange={handleChange} value={keyword} />
+          <button onChange={handleClick}>search</button>
+            <P>{typing ? `lookinf  for ${keyword}...` : result}</P>
+          </>
+        );
+      };
+
+        ReactDOM.render(<App/>, rootElement);
+      </script>
+    </body>
+</html>
