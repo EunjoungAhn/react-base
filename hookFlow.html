@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      const App = () => {
+        console.log("app render start");
+        //누룰때 마다 동작이 달라야 하니
+        const [show, setShow] = React.useState(() => {
+          //useState 상태 보기
+          console.log("app useState");
+          return false;
+        });
+
+        React.useEffect(() =>{
+          console.log("app useEffect no deps");
+        });
+
+        React.useEffect(() =>{
+          console.log("app useEffect empty deps");
+        }, []);
+        
+        React.useEffect(() =>{
+          console.log("app useEffect, [show]");
+        }, [show]);
+
+        function handleClick(){
+          //useState로 만든 것은 인자로 이전값을 가지고 있다.
+          //setShow(true);
+          setShow((prev) => !prev);
+        }
+
+        //show 라면 보여주고 아니라면 보여주지 마라
+        return (
+        <>
+          <button onclick={handleClick}>Search</button>
+          {show ? (
+            <>
+              <input/>
+              <p></p>
+            </>
+          ) : null}
+        </>
+        );
+      };
+
+        console.log("app render end");
+        ReactDOM.render(<App/>, rootElement);
+      </script>
+    </body>
+</html>
