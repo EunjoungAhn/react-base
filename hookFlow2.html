@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      //!!!!!! 실행순서 !!!!!! 중요 !!!!!
+
+      //부모가 다 그려지고 자식이 그려지긴 하지만,
+      //자식이 다 그려지고 자식의 useEffect가 실행되고 나서,
+      //부모의 useEffect가 실행된다.
+
+      //리액트가 알아서 동작을 실행안해도 클린업은 계속 진행해준다.
+
+      //!!!!!!
+      const Child = () => {
+        console.log("   Child render start");
+        const [text, setText] = React.useState(()=>{
+          console.log("   Child useState");
+          return "";
+        });
+
+        React.useEffect(() =>{
+          console.log("   Child useEffect no deps");
+          
+          //이전의 상태를 싹 지운다.
+          return () => {
+            console.log("   Child useEffect cleanUp, no deps");
+          }
+        });
+
+        React.useEffect(() =>{
+          console.log("   Child useEffect empty deps");
+
+          return () => {
+            console.log("   Child useEffect cleanUp, empty deps");
+          }
+        }, []);
+
+        React.useEffect(() =>{
+          console.log("   Child useEffect [text]");
+
+          return () => {
+            console.log("   Child useEffect cleanUp, [text]");
+          }
+        }, [text]);
+
+        function handleChange(event){
+          setText(event.target.value);
+        }
+        
+        const element = (
+              <>
+                <input onChange={handleChange}/>
+                <p></p>
+              </>
+        );
+
+        console.log("   Child render end");
+        return element;
+      }
+
+      const App = () => {
+        console.log("app render start");
+        //누룰때 마다 동작이 달라야 하니
+        const [show, setShow] = React.useState(() => {
+          //useState 상태 보기
+          console.log("app useState");
+          return false;
+        });
+
+        React.useEffect(() =>{
+          console.log("app useEffect no deps");
+        });
+
+        React.useEffect(() =>{
+          console.log("app useEffect empty deps");
+        }, []);
+        
+        React.useEffect(() =>{
+          console.log("app useEffect, [show]");
+        }, [show]);
+
+        function handleClick(){
+          //useState로 만든 것은 인자로 이전값을 가지고 있다.
+          //setShow(true);
+          setShow((prev) => !prev);
+        }
+
+        console.log("app render end");
+
+        //show 라면 보여주고 아니라면 보여주지 마라
+        return (
+          <>
+            <button onclick={handleClick}>Search</button>
+            {show ? <Child /> : null}
+          </>
+        );
+      };
+
+        ReactDOM.render(<App/>, rootElement);
+      </script>
+    </body>
+</html>
