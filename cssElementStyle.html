@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
+    <style>
+      .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+    </style>
+    <script type="text/babel">
+      //리액트에서는 style이 더 우선이고 className 더 후 순위이다.
+      //리액트의 장점은 jsx = js와 html을 섞어 쓸 수 있고, 함수로 뺄 수 있다.
+      function Button({ className="", style, ...rest}) {
+        return (
+          <button 
+            className={`button ${className}`}
+            style={ { fontSize: 50, ...style}}
+            {...rest}
+          />
+        );
+      }
+
+      const element = (
+        <>
+          <Button className="button" style={{borderRadius: "50%"}}>Button</Button>
+        </>
+      );
+      ReactDOM.render(element, document.getElementById("root"));
+    </script>
+  </body>
+</html>
