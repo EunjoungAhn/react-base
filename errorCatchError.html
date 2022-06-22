@@ -7,9 +7,36 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js."></script>
     <script type="text/babel">
       const rootElement = document.getElementById("root");
+      //리액트는 함수형 컴포넌트가 나오기전에 클래스 컴포넌트를 사용했었다.
+      class ErrorBoundary extends React.Componet{
+        state = { error:null };
+        static getDeriveStateFormError(error){
+          return { error };//받은 에러를 그대로 set
+        }
+        //클래스 함수는 render를 따로 받고 있다.
+        render(){
+          const { error } = this.state;
+          if (error){
+            //return <p>There is some error...</p>;
+            return this.props.fallback;
+          }
+
+          return this.props.childeren;
+        }
+      }
+      
+      const Child = () => {
+        //그리는 과정에서 직접 throw 에러 해보기
+        throw new Error("Something Wrong...");
+        return <p>CHild...</p>;
+      };
       const App = () => {   
-        return <>
-        
+        return
+        <>
+          <p>App</p>
+          <ErrorBoundary fallback={<p>There is some Error...</p>}>
+            <Child />
+          </ErrorBoundary>
         </>
       };
 
